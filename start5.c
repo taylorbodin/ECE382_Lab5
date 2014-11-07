@@ -37,35 +37,39 @@ void main(void) {
 			}
 
 			if(irPacket == CH_UP){
-				up = TRUE;
+				up += TRUE;
+				P1OUT |= BIT0;
 			}
 
 			if(irPacket == CH_DW){
-				down = TRUE;
+				down += TRUE;
+				P1OUT &= ~BIT0;
 			}
 
 			if(irPacket == VOL_UP){
-				right = TRUE;
+				right += TRUE;
+				P1OUT |= BIT6;
 			}
 
 			if(irPacket == VOL_DW){
-				left = TRUE;
+				left += TRUE;
+				P1OUT &= ~BIT6;
 			}
 
 			if(irPacket == ONE){
-				one = TRUE;
+				one += TRUE;
 			}
 
 			if(irPacket == TWO){
-				two = TRUE;
+				two += TRUE;
 			}
 
 			if(irPacket == THR){
-				thr = TRUE;
+				thr += TRUE;
 			}
 
 			if(irPacket == PWR){
-				pow = TRUE;
+				pow += TRUE;
 			}
 
 			_enable_interrupt();
