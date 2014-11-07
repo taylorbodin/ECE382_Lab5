@@ -6,6 +6,7 @@ Evil Remote Controls
 ## Day 1
 
 |Pulse| Duration(ms)| Timer A counts|
+|-----|-------------|---------------|
 |Start Logic 0|     9000    |     9000       |
 |Start Logic 1|     4430    |     4430       |
 |Data 1 Logic 0|    530     |     530        |
@@ -16,6 +17,7 @@ Evil Remote Controls
 |Stop Logic 1|      LONG    |     LONG       |
 
 |Button|code|
+-------|-----|
 |Power|0x61A0F00E|
 | 0 |0x61A0906E|
 | 1 |0x61A000FE|
