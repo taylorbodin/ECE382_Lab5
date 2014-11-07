@@ -17,7 +17,7 @@ Evil Remote Controls
 |Stop Logic 1|      LONG    |     LONG       |
 
 |Button|code|
--------|-----|
+|-------|-----|
 |Power|0x61A0F00E|
 | 0 |0x61A0906E|
 | 1 |0x61A000FE|
