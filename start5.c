@@ -7,9 +7,13 @@
 #include <msp430g2553.h>
 #include "start5.h"
 
-int8	newIrPacket = FALSE;
-int8	up, down, left, right, one, two, thr, pow;
-int8	i,j;
+extern void init();
+extern void initNokia();
+extern void clearDisplay();
+extern void drawBlock(unsigned char row, unsigned char col, unsigned char block_color);
+void Sleep(int ms);
+
+int8	i,j,x,y,erase,drawMode;
 int8	packetBit = 0;
 int16	packetData[80];
 int8	packetIndex = 0;
@@ -18,8 +22,11 @@ int32	irPacket = 0;
 // -----------------------------------------------------------------------
 // -----------------------------------------------------------------------
 void main(void) {
-
-	initMSP430();				// Setup MSP to process IR and buttons
+	initMSP430();
+	x = 4;
+	y = 4;
+	drawMode = FALSE;
+	erase = FALSE;
 
 	while(1)  {
 
@@ -37,48 +44,75 @@ void main(void) {
 			}
 
 			if(irPacket == CH_UP){
-				up += TRUE;
-				P1OUT |= BIT0;
+				if(y>=1) y += -1;
+				drawMode = TRUE;
+
 			}
 
 			if(irPacket == CH_DW){
-				down += TRUE;
-				P1OUT &= ~BIT0;
+				if(y<=7) y += 1;
+				drawMode = TRUE;
 			}
 
 			if(irPacket == VOL_UP){
-				right += TRUE;
-				P1OUT |= BIT6;
+				if(x<=10) x += 1;
+				drawMode = TRUE;
 			}
 
 			if(irPacket == VOL_DW){
-				left += TRUE;
-				P1OUT &= ~BIT6;
+				if(x>=1) x += -1;
+				drawMode = TRUE;
 			}
 
 			if(irPacket == ONE){
-				one += TRUE;
+				erase = TRUE;
+				drawMode = TRUE;
 			}
 
 			if(irPacket == TWO){
-				two += TRUE;
+				erase = FALSE;
+				drawMode = TRUE;
 			}
 
 			if(irPacket == THR){
-				thr += TRUE;
+
 			}
 
 			if(irPacket == PWR){
-				pow += TRUE;
+
 			}
 
-			_enable_interrupt();
+			if(drawMode == TRUE){
+				init();
+				initNokia();
+				drawBlock(x,y,erase);
+				Sleep(50);
+				initMSP430();
+				drawMode = FALSE;
+			}
+
 			i = 0;
 			packetIndex = 0;
-
+			_enable_interrupt();
 		} // end if new IR packet arrived
 	} // end infinite loop
 } // end main
+
+
+
+//------------------------------------------------------------------------
+// The function sleep is borrowed from lab 4
+//------------------------------------------------------------------------
+void Sleep(int ms){
+	int i, nop;
+	nop = 0;
+
+	for(i = 0; i < ms*250; i++){ // As a SWAG, I think this takes about four ms to execute
+		nop += 1;
+	}
+
+	return;
+}
 
 // -----------------------------------------------------------------------
 // In order to decode IR packets, the MSP430 needs to be configured to
