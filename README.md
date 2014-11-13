@@ -172,7 +172,7 @@ For the first part of the lab there was little debugging that needed to be pefor
 
 Since all the ground work had already been done for the A functionality I just had to modify the code to move the block on button presses instead of toggling the LED. The problem I encountered with this was that the clock settings were different for decoding IR packets and communicating to the Nokia. To work around this problem I introduced the drawMode flag which set up the MSP430 to operate in accordance with the peripheral's specifications as we needed it. The only problem with this is that the Nokia display did not like this and gave a somewhat glitchy readout. I couldn't solve this problem within the time constraints. 
 
-A video of me displaying A functionality can be found ![here.](https://www.youtube.com/watch?v=c9cfKBmpMcQ)
+A video of me displaying A functionality can be found [here.](https://www.youtube.com/watch?v=c9cfKBmpMcQ)
 
 ## Conclusion
 I learned quite a bit about ISR's in this lab which I think was the intended effect. More than anything I realized that I didn't know as much as I should about them. This lab challenged my understanding in a good way. It's tough to interact with hardware having never done it before. In the future I think I'll be able to handle them better. I also like that there was a problem in the lab that I didn't see coming and couldn't fix in time. It taught me to always consider than not all peripherals can run under the same conditions and that I need to figure out how to reconcile that fact. 
