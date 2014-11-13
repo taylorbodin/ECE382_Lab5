@@ -75,6 +75,10 @@ void main(void) {
 			}
 
 			if(irPacket == THR){
+				init();
+				initNokia();
+				clearDisplay();
+				initMSP430();
 
 			}
 
@@ -86,7 +90,6 @@ void main(void) {
 				init();
 				initNokia();
 				drawBlock(x,y,erase);
-				Sleep(50);
 				initMSP430();
 				drawMode = FALSE;
 			}
